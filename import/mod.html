@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="mult(2, 2)">2X2=?</button>
+    <button id="btn">引入乘法模块</button>
+    <pre>
+        1. 点击2X2，弹出null
+        2. 点击引入模块
+        3. 点击2X2，弹出4
+    </pre>
+    <div>
+        <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/import">MDN参考地址</a>
+    </div>
+</body>
+<script type="module" src="./js/main.js"></script>
+
+<script>
+    // 动态加载模块  import()
+    let multMod = null;
+    const btn = document.getElementById('btn')
+    btn.onclick = () => {
+        import('/modules/mod3.js')
+            .then((res) => {
+                multMod = res
+            })
+    }
+
+
+
+    function mult (a, b) {
+        let res = multMod && multMod.mult(a, b)
+        alert(res)
+    }
+</script>
+</html>
